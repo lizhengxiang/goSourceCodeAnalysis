@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9fe4d57a-44b6-4537-a2c8-35e176a62f74" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="GOROOT" path="/usr/local/go" />
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1bmfSh62qnc6MliVOlfgVdAgvKh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
+  </component>
+  <component name="RunManager" selected="Go Test.BenchmarkHashStringSpeed in go/src/runtime">
+    <configuration name="go build go/src/net/http" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="src" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/net/http/triv.go" />
+      <package value="go/src/net/http" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="BenchmarkHashStringSpeed in go/src/runtime" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="src" />
+      <working_directory value="$PROJECT_DIR$/runtime" />
+      <framework value="gobench" />
+      <kind value="PACKAGE" />
+      <package value="go/src/runtime" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^BenchmarkHashStringSpeed$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestClient in go/src/net/http" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="src" />
+      <working_directory value="$PROJECT_DIR$/net/http" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="go/src/net/http" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestClient$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.BenchmarkHashStringSpeed in go/src/runtime" />
+        <item itemvalue="Go Build.go build go/src/net/http" />
+        <item itemvalue="Go Test.TestClient in go/src/net/http" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VgoProject">
+    <proxy>http://athens.hellobike.cn:3000</proxy>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="309" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599545477988">
+      <screen x="0" y="23" width="1440" height="793" />
+    </state>
+    <state x="309" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.793/-295.-1057.1920.1057@0.23.1440.793" timestamp="1599545477988" />
+    <state width="1398" height="143" key="GridCell.Tab.0.bottom" timestamp="1600176321925">
+      <screen x="0" y="23" width="1440" height="793" />
+    </state>
+    <state width="1398" height="143" key="GridCell.Tab.0.bottom/0.23.1440.793/-295.-1057.1920.1057@-295.-1057.1920.1057" timestamp="1600073730803" />
+    <state width="1398" height="143" key="GridCell.Tab.0.bottom/0.23.1440.793/-295.-1080.1920.1080@0.23.1440.793" timestamp="1595906535986" />
+    <state width="1398" height="143" key="GridCell.Tab.0.bottom/0.23.1440.793@0.23.1440.793" timestamp="1600176321925" />
+    <state width="1398" height="143" key="GridCell.Tab.0.center" timestamp="1600176321923">
+      <screen x="0" y="23" width="1440" height="793" />
+    </state>
+    <state width="1398" height="143" key="GridCell.Tab.0.center/0.23.1440.793/-295.-1057.1920.1057@-295.-1057.1920.1057" timestamp="1600073730802" />
+    <state width="1398" height="143" key="GridCell.Tab.0.center/0.23.1440.793/-295.-1080.1920.1080@0.23.1440.793" timestamp="1595906535984" />
+    <state width="1398" height="143" key="GridCell.Tab.0.center/0.23.1440.793@0.23.1440.793" timestamp="1600176321923" />
+    <state width="1398" height="143" key="GridCell.Tab.0.left" timestamp="1600176321923">
+      <screen x="0" y="23" width="1440" height="793" />
+    </state>
+    <state width="1398" height="143" key="GridCell.Tab.0.left/0.23.1440.793/-295.-1057.1920.1057@-295.-1057.1920.1057" timestamp="1600073730801" />
+    <state width="1398" height="143" key="GridCell.Tab.0.left/0.23.1440.793/-295.-1080.1920.1080@0.23.1440.793" timestamp="1595906535983" />
+    <state width="1398" height="143" key="GridCell.Tab.0.left/0.23.1440.793@0.23.1440.793" timestamp="1600176321923" />
+    <state width="1398" height="143" key="GridCell.Tab.0.right" timestamp="1600176321924">
+      <screen x="0" y="23" width="1440" height="793" />
+    </state>
+    <state width="1398" height="143" key="GridCell.Tab.0.right/0.23.1440.793/-295.-1057.1920.1057@-295.-1057.1920.1057" timestamp="1600073730803" />
+    <state width="1398" height="143" key="GridCell.Tab.0.right/0.23.1440.793/-295.-1080.1920.1080@0.23.1440.793" timestamp="1595906535985" />
+    <state width="1398" height="143" key="GridCell.Tab.0.right/0.23.1440.793@0.23.1440.793" timestamp="1600176321924" />
+    <state x="386" y="207" width="683" height="552" key="find.popup" timestamp="1600997019388">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="386" y="207" width="683" height="552" key="find.popup/0.0.1440.900/-295.-1080.1920.1080@0.0.1440.900" timestamp="1600997019388" />
+    <state x="386" y="205" width="683" height="486" key="find.popup/0.23.1440.793/-295.-1057.1920.1057@0.23.1440.793" timestamp="1600589197240" />
+    <state x="386" y="205" width="683" height="486" key="find.popup/0.23.1440.793/-295.-1080.1920.1080@0.23.1440.793" timestamp="1600742421375" />
+    <state x="385" y="196" width="670" height="596" key="search.everywhere.popup" timestamp="1599649118824">
+      <screen x="0" y="23" width="1440" height="793" />
+    </state>
+    <state x="385" y="196" width="670" height="596" key="search.everywhere.popup/0.23.1440.793/-295.-1057.1920.1057@0.23.1440.793" timestamp="1599649118824" />
+    <state x="385" y="196" width="670" height="596" key="search.everywhere.popup/0.23.1440.793@0.23.1440.793" timestamp="1593865222264" />
+  </component>
+</project>
