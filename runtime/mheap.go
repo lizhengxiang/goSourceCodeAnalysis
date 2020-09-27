@@ -398,16 +398,16 @@ type mSpanList struct {
 	last  *mspan // last span in list, or nil if none
 }
 
-//go:notinheap
+//go:notinheap  span 是go 内存管理的基本单元
 type mspan struct {
-	next *mspan     // next span in list, or nil if none
-	prev *mspan     // previous span in list, or nil if none
-	list *mSpanList // For debugging. TODO: Remove.
+	next *mspan     // next span in list, or nil if none //指向下一个span的指针
+	prev *mspan     // previous span in list, or nil if none // 指向前一个span的指针
+	list *mSpanList // For debugging. TODO: Remove.  链表地址
 
-	startAddr uintptr // address of first byte of span aka s.base()
-	npages    uintptr // number of pages in span
-
-	manualFreeList gclinkptr // list of free objects in mSpanManual spans
+	startAddr uintptr // address of first byte of span aka s.base() // span在arens区域的起始位置
+	npages    uintptr // number of pages in span // 当前 span 占用arena 区域的page 的数量
+	// 在mSpanManual 的空闲地址
+	manualFreeList gclinkptr // list of free objects in mSpanManual spans  空闲对象列表
 
 	// freeindex is the slot index between 0 and nelems at which to begin scanning
 	// for the next free object in this span.
@@ -424,10 +424,14 @@ type mspan struct {
 	// undefined and should never be referenced.
 	//
 	// Object n starts at address n*elemsize + (start << pageShift).
+	// freeindex 标记 0——belems之间的插槽索引，标记的是在span中的下一个空闲对象
+	// 每次分配都从freeindex开始，直到遇到表示空闲对象的地方，之后调整freeindex 使得下一次扫描能跳过上一次的分配
+	// 若 freeindex == nelem 则当前span没有了空余对象
+	// allocbits 是span的位图
 	freeindex uintptr
 	// TODO: Look up nelems from sizeclass and remove this field if it
 	// helps performance.
-	nelems uintptr // number of object in the span.
+	nelems uintptr // number of object in the span. 管理空闲对象数
 
 	// Cache of the allocBits at freeindex. allocCache is shifted
 	// such that the lowest bit corresponds to the bit freeindex.
@@ -435,7 +439,7 @@ type mspan struct {
 	// ctz (count trailing zero) to use it directly.
 	// allocCache may contain bits beyond s.nelems; the caller must ignore
 	// these.
-	allocCache uint64
+	allocCache uint64   // 从 freeindex 开始的位标记
 
 	// allocBits and gcmarkBits hold pointers to a span's mark and
 	// allocation bits. The pointers are 8 byte aligned.
@@ -459,8 +463,8 @@ type mspan struct {
 	// The sweep will free the old allocBits and set allocBits to the
 	// gcmarkBits. The gcmarkBits are replaced with a fresh zeroed
 	// out memory.
-	allocBits  *gcBits
-	gcmarkBits *gcBits
+	allocBits  *gcBits  // 该span 中对象的位图标记
+	gcmarkBits *gcBits  // 该span 中对象的位图标记，用于垃圾回收
 
 	// sweep generation:
 	// if sweepgen == h->sweepgen - 2, the span needs sweeping
@@ -470,17 +474,17 @@ type mspan struct {
 	// if sweepgen == h->sweepgen + 3, the span was swept and then cached and is still cached
 	// h->sweepgen is incremented by 2 after every GC
 
-	sweepgen    uint32
+	sweepgen    uint32    // 扫描计数器数量，用户与mheap 的 sweepgen 比较，根据差值确定该span的扫描状态
 	divMul      uint16        // for divide by elemsize - divMagic.mul
 	baseMask    uint16        // if non-0, elemsize is a power of 2, & this will get object allocation base
-	allocCount  uint16        // number of allocated objects
-	spanclass   spanClass     // size class and noscan (uint8)
+	allocCount  uint16        // number of allocated objects  已分配对象的个数
+	spanclass   spanClass     // size class and noscan (uint8) span 分类
 	state       mSpanStateBox // mSpanInUse etc; accessed atomically (get/set methods)
-	needzero    uint8         // needs to be zeroed before allocation
+	needzero    uint8         // needs to be zeroed before allocation  分配之前需要置0
 	divShift    uint8         // for divide by elemsize - divMagic.shift
 	divShift2   uint8         // for divide by elemsize - divMagic.shift2
-	elemsize    uintptr       // computed from sizeclass or from npages
-	limit       uintptr       // end of data in span
+	elemsize    uintptr       // computed from sizeclass or from  npages
+	limit       uintptr       // end of data in span  申请大对象内存快会用到，mspan的数据截止位置
 	speciallock mutex         // guards specials list
 	specials    *special      // linked list of special records sorted by offset.
 }

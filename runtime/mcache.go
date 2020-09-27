@@ -16,6 +16,7 @@ import (
 // must be specially handled.
 //
 //go:notinheap
+// 每个处理器都会分配一个线程缓存。mcache 用于处理微对象和小对象的分配。他们会持有内存管理单元mspan
 type mcache struct {
 	// The following members are accessed on every malloc,
 	// so they are grouped here for better caching.
@@ -31,26 +32,26 @@ type mcache struct {
 	// tiny is a heap pointer. Since mcache is in non-GC'd memory,
 	// we handle it by clearing it in releaseAll during mark
 	// termination.
-	tiny             uintptr
-	tinyoffset       uintptr
-	local_tinyallocs uintptr // number of tiny allocs not counted in other stats
+	tiny             uintptr   //<16 byte 申请小对象的其实地址
+	tinyoffset       uintptr // 从起始地址tiny开始的偏移量
+	local_tinyallocs uintptr // number of tiny allocs not counted in other stats  // tiny 对象的分配数量
 
 	// The rest is not accessed on every malloc.
-
+	// 分配的mspn list 其中numspanclass = 134 索引是splanclassId
 	alloc [numSpanClasses]*mspan // spans to allocate from, indexed by spanClass
 
-	stackcache [_NumStackOrders]stackfreelist
+	stackcache [_NumStackOrders]stackfreelist // 栈缓存
 
 	// Local allocator stats, flushed during GC.
-	local_largefree  uintptr                  // bytes freed for large objects (>maxsmallsize)
-	local_nlargefree uintptr                  // number of frees for large objects (>maxsmallsize)
-	local_nsmallfree [_NumSizeClasses]uintptr // number of frees for small objects (<=maxsmallsize)
+	local_largefree  uintptr                  // bytes freed for large objects (>maxsmallsize) 大对象释放字节数
+	local_nlargefree uintptr                  // number of frees for large objects (>maxsmallsize) 释放的大对象数量
+	local_nsmallfree [_NumSizeClasses]uintptr // number of frees for small objects (<=maxsmallsize) // 每种规格小对象释放的个数
 
 	// flushGen indicates the sweepgen during which this mcache
 	// was last flushed. If flushGen != mheap_.sweepgen, the spans
 	// in this mcache are stale and need to the flushed so they
 	// can be swept. This is done in acquirep.
-	flushGen uint32
+	flushGen uint32   // 扫描计数器
 }
 
 // A gclink is a node in a linked list of blocks, like mlink,

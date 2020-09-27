@@ -71,6 +71,15 @@ package runtime
 //    65      28672       57344        2           0      4.91%
 //    66      32768       32768        1           0     12.50%
 
+
+//class 分类id或者规格id，也就是spanclass，表示该span 可存储的对象规格类型
+//bytes/obj 该列代表能存存储每个对象的字节数，也就是说可以存储多大的对象，字段是elemsize
+// bytes/span 每个span 占用堆的字节数，也即页数的大小，npanges8KB
+//object 每个span可分配的元素个数，或者说可存储的对象个数，也就是nelems 也即 （bytes/spans）/（bytes/obj）
+//tail waste 每个span产生的内存碎片
+//max waste 最大浪费比例。 （bytes/obj-最小使用量）objects/(bytes/span)100,比如classId=2 最小使用量是9bytes，则max waste=（16-9）512/8192100=43.75%
+// 如果超过32km 由特殊的class表示，即class=0
+
 const (
 	_MaxSmallSize   = 32768
 	smallSizeDiv    = 8

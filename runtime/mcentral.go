@@ -19,11 +19,11 @@ import "runtime/internal/atomic"
 //go:notinheap
 type mcentral struct {
 	lock      mutex
-	spanclass spanClass
+	spanclass spanClass    // span class id
 
 	// For !go115NewMCentralImpl.
-	nonempty mSpanList // list of spans with a free object, ie a nonempty free list
-	empty    mSpanList // list of spans with no free objects (or cached in an mcache)
+	nonempty mSpanList // list of spans with a free object, ie a nonempty free list  空闲的span列表
+	empty    mSpanList // list of spans with no free objects (or cached in an mcache) 已经被使用的span 列表
 
 	// partial and full contain two mspan sets: one of swept in-use
 	// spans, and one of unswept in-use spans. These two trade
@@ -49,7 +49,7 @@ type mcentral struct {
 	// nmalloc is the cumulative count of objects allocated from
 	// this mcentral, assuming all spans in mcaches are
 	// fully-allocated. Written atomically, read under STW.
-	nmalloc uint64
+	nmalloc uint64 //这个mcentral 分配mspan的累计计数
 }
 
 // Initialize a single central free list.

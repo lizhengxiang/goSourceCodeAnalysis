@@ -19,13 +19,14 @@ func sysAlloc(n uintptr, sysStat *uint64) unsafe.Pointer {
 	mSysStatInc(sysStat, n)
 	return v
 }
-
+// 通知操作系统该虚拟对应的物理内存不需要了，它可以重用物理内存
 func sysUnused(v unsafe.Pointer, n uintptr) {
 	// MADV_FREE_REUSABLE is like MADV_FREE except it also propagates
 	// accounting information about the process to task_info.
 	madvise(v, n, _MADV_FREE_REUSABLE)
 }
 
+//通知操作系统应用程序需要使用该区域，需要保证该内存区域安全被访问
 func sysUsed(v unsafe.Pointer, n uintptr) {
 	// MADV_FREE_REUSE is necessary to keep the kernel's accounting
 	// accurate. If called on any memory region that hasn't been
@@ -43,7 +44,7 @@ func sysFree(v unsafe.Pointer, n uintptr, sysStat *uint64) {
 	mSysStatDec(sysStat, n)
 	munmap(v, n)
 }
-
+//把内存区域转化成保留状态，主要是运行时的调试
 func sysFault(v unsafe.Pointer, n uintptr) {
 	mmap(v, n, _PROT_NONE, _MAP_ANON|_MAP_PRIVATE|_MAP_FIXED, -1, 0)
 }
@@ -57,7 +58,7 @@ func sysReserve(v unsafe.Pointer, n uintptr) unsafe.Pointer {
 }
 
 const _ENOMEM = 12
-
+//保证内存区域可以快速转化成准备就绪
 func sysMap(v unsafe.Pointer, n uintptr, sysStat *uint64) {
 	mSysStatInc(sysStat, n)
 

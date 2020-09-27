@@ -13,6 +13,7 @@ import (
 // Don't split the stack as this function may be invoked without a valid G,
 // which prevents us from allocating more stack.
 //go:nosplit
+// 会从操作系统中获取一大块可用的内存空间，可能为几百 KB 或者几 MB
 func sysAlloc(n uintptr, sysStat *uint64) unsafe.Pointer {
 	v, err := mmap(nil, n, _PROT_READ|_PROT_WRITE, _MAP_ANON|_MAP_PRIVATE, -1, 0)
 	if err != 0 {
@@ -35,6 +36,7 @@ func sysHugePage(v unsafe.Pointer, n uintptr) {
 // Don't split the stack as this function may be invoked without a valid G,
 // which prevents us from allocating more stack.
 //go:nosplit
+// 会在程序发生内存不足时调用，并无条件的返回内存
 func sysFree(v unsafe.Pointer, n uintptr, sysStat *uint64) {
 	mSysStatDec(sysStat, n)
 	munmap(v, n)

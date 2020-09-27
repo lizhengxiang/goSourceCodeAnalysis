@@ -1009,8 +1009,10 @@ func mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer {
 			// standalone escaping variables. On a json benchmark
 			// the allocator reduces number of allocations by ~12% and
 			// reduces heap size by ~20%.
+			// 从起始地址tiny开始的偏移量
 			off := c.tinyoffset
 			// Align tiny pointer for required (conservative) alignment.
+			//根据不同的内存对齐
 			if size&7 == 0 {
 				off = alignUp(off, 8)
 			} else if size&3 == 0 {
@@ -1020,8 +1022,10 @@ func mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer {
 			}
 			if off+size <= maxTinySize && c.tiny != 0 {
 				// The object fits into existing tiny block.
+				// tiny+ 偏移量
 				x = unsafe.Pointer(c.tiny + off)
 				c.tinyoffset = off + size
+				// tiny 对象的分配数量
 				c.local_tinyallocs++
 				mp.mallocing = 0
 				releasem(mp)
@@ -1044,7 +1048,10 @@ func mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer {
 			}
 			size = maxTinySize
 		} else {
+			// mpsn 管理了很多不同规格不同类型的span，go对于【16b，32kb】的对象使用这部分span进行内存分配，
+			// 所以所有在这块区间的大小对象都会从alloc这个数组里寻找
 			var sizeclass uint8
+			// 确定规格
 			if size <= smallSizeMax-8 {
 				sizeclass = size_to_class8[divRoundUp(size, smallSizeDiv)]
 			} else {
@@ -1052,6 +1059,7 @@ func mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer {
 			}
 			size = uintptr(class_to_size[sizeclass])
 			spc := makeSpanClass(sizeclass, noscan)
+			//alloc中查到
 			span := c.alloc[spc]
 			v := nextFreeFast(span)
 			if v == 0 {
